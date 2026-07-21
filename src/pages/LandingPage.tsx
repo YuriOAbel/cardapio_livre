@@ -218,7 +218,7 @@ export function LandingPage() {
                 d: 'Combos e adicionais visíveis aumentam o valor médio do pedido.',
               },
               {
-                t: 'Mobile-first',
+                t: 'Disponível para celular',
                 d: 'Feito para o celular do cliente — onde o pedido realmente acontece.',
               },
               {
@@ -226,7 +226,7 @@ export function LandingPage() {
                 d: 'Usamos o perfil do seu negócio para cotar o modelo certo em até 1 hora.',
               },
               {
-                t: 'Sem hardware obrigatório',
+                t: 'Tudo 100% digital',
                 d: 'Comece pelo link. Tablet e QR entram quando fizer sentido.',
               },
             ].map((b) => (

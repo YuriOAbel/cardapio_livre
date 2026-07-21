@@ -16,6 +16,12 @@ import imgBatataRustica from '../assets/burguer-sport/batata-rustica.jpg'
 import imgOnionRings from '../assets/burguer-sport/onion-rings.jpg'
 import imgRefrigeranteLata from '../assets/burguer-sport/refrigerante-lata.jpg'
 import imgMilkshakeOreo from '../assets/burguer-sport/milkshake-oreo.jpg'
+import imgEspressoDuplo from '../assets/cafe-nuvem/espresso-duplo.jpg'
+import imgCappuccinoCremoso from '../assets/cafe-nuvem/cappuccino-cremoso.jpg'
+import imgCroissantAmendoas from '../assets/cafe-nuvem/croissant-amendoas.jpg'
+import imgPaoNaChapa from '../assets/cafe-nuvem/pao-na-chapa.jpg'
+import imgBowlAcaiGranola from '../assets/cafe-nuvem/bowl-acai-granola.jpg'
+import imgChaGeladoHibisco from '../assets/cafe-nuvem/cha-gelado-hibisco.jpg'
 
 export const menus: MenuConfig[] = [
   {
@@ -184,6 +190,7 @@ export const menus: MenuConfig[] = [
         price: 10,
         category: 'Cafés',
         emoji: '☕',
+        imageSrc: imgEspressoDuplo,
       },
       {
         id: 'caf-2',
@@ -192,6 +199,7 @@ export const menus: MenuConfig[] = [
         price: 14,
         category: 'Cafés',
         emoji: '🧋',
+        imageSrc: imgCappuccinoCremoso,
       },
       {
         id: 'caf-3',
@@ -200,6 +208,7 @@ export const menus: MenuConfig[] = [
         price: 16,
         category: 'Padaria',
         emoji: '🥐',
+        imageSrc: imgCroissantAmendoas,
       },
       {
         id: 'caf-4',
@@ -208,6 +217,7 @@ export const menus: MenuConfig[] = [
         price: 12,
         category: 'Padaria',
         emoji: '🍞',
+        imageSrc: imgPaoNaChapa,
       },
       {
         id: 'caf-5',
@@ -216,6 +226,7 @@ export const menus: MenuConfig[] = [
         price: 24,
         category: 'Brunch',
         emoji: '🥣',
+        imageSrc: imgBowlAcaiGranola,
       },
       {
         id: 'caf-6',
@@ -224,6 +235,7 @@ export const menus: MenuConfig[] = [
         price: 11,
         category: 'Bebidas',
         emoji: '🍵',
+        imageSrc: imgChaGeladoHibisco,
       },
     ],
   },
