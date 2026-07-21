@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190" role="img" aria-labelledby="title">
+  <title id="title">Café Nuvem — ícone</title>
+  <g id="cup-icon">
+  <!-- Bottom (light) — rounded base, cloud top edge -->
+  <path fill="#E58E49" d="
+    M42 122
+    C54 112 66 116 78 122
+    C90 128 102 114 116 116
+    C130 118 142 128 158 120
+    L158 142
+    C158 164 136 178 100 178
+    C64 178 42 164 42 142
+    Z"/>
+  <!-- Middle (cocoa) — thinner band, puffier cloud waves -->
+  <path fill="#965A38" d="
+    M42 78
+    C54 68 68 74 80 82
+    C92 90 106 70 120 72
+    C134 74 146 86 158 76
+    L158 112
+    C146 122 134 110 120 108
+    C106 106 92 120 80 114
+    C68 108 54 112 42 116
+    Z"/>
+  <!-- Top (espresso) — flat rim + cloud bottom -->
+  <path fill="#3D2B1F" d="
+    M42 32
+    L158 32
+    L158 68
+    C146 78 134 66 120 64
+    C106 62 92 78 80 72
+    C68 66 54 70 42 74
+    Z"/>
+  <!-- Handle — thick C attached to top band -->
+  <path fill="#3D2B1F" d="
+    M158 38
+    C188 38 202 52 202 70
+    C202 88 188 102 158 102
+    L158 86
+    C176 86 184 80 184 70
+    C184 60 176 54 158 54
+    Z"/>
+</g>
+</svg>

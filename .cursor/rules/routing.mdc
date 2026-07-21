@@ -1,0 +1,11 @@
+---
+description: Router for React Router v7 routes in App.tsx.
+globs: "{src/App.tsx,src/pages/**}"
+alwaysApply: false
+---
+
+# Rule: Routing Router
+
+- If touching `src/App.tsx` routes or adding pages, read and follow
+  `.cursor/skills/routing/SKILL.md`.
+- Source of truth: skill.

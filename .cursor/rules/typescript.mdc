@@ -1,0 +1,11 @@
+---
+description: Router for TypeScript types and tsconfig.
+globs: "{src/types.ts,src/**/*.ts,src/**/*.tsx,tsconfig.json}"
+alwaysApply: false
+---
+
+# Rule: TypeScript Router
+
+- If adding/editing domain types or tsconfig, read and follow
+  `.cursor/skills/typescript/SKILL.md`.
+- Source of truth: skill.

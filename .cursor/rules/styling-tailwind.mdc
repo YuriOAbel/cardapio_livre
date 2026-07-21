@@ -1,0 +1,11 @@
+---
+description: Router for Tailwind CSS v4 styling conventions.
+globs: "{src/**/*.{tsx,css},vite.config.ts}"
+alwaysApply: false
+---
+
+# Rule: Styling Tailwind Router
+
+- If touching styles, Tailwind classes, `src/index.css`, or Vite Tailwind plugin setup, read and follow
+  `.cursor/skills/styling-tailwind/SKILL.md`.
+- Source of truth: skill.

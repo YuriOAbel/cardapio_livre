@@ -1,0 +1,120 @@
+# Cardápio Livre — project context
+
+## ⚠️ PRIORITY 0: CAVEMAN PROTOCOL ⚠️
+**Always apply the Caveman principles before, during, and after any task.** The Caveman rules govern AI behavior, efficiency, and code generation across the entire project. All other architecture rules and skills must inherit from and comply with this foundation.
+
+## Product context
+
+App Overview: **Cardápio Livre** is a marketing site (React + Vite) that sells digital menus for Brazilian foodservice (sorveteria, lanchonete, cafeteria, etc.). Prospects browse three live demo menus, then request a quote.
+
+Core Functionality:
+- Landing page (`/`): brand hero, demo cases, benefits, how-it-works, CTAs.
+- Demo menus (`/cardapio/:slug`): mobile-first catalog with cart + fake order confirmation (showcase only — no real checkout).
+- Quote modal: multi-field form (business profile + contact); submits via FormSubmit (`src/lib/email.ts`).
+- Quote state: React context (`QuoteProvider` / `useQuote`) shared by LP, menus, and modal.
+
+Data Strategy: Static menu configs in `src/data/menus.ts`. No backend, no auth, no database. Quote lead capture is client → FormSubmit AJAX.
+
+---
+
+## Mandatory: read before implementation
+
+Before writing or modifying code in this project, read the matching rule in `.cursor/rules/` for the task.  
+Rules are lightweight routers; detailed implementation guidance lives in `.cursor/skills/`.
+
+| Task | Rule file (`.cursor/rules/`) | Skill file (`.cursor/skills/`) |
+|---|---|---|
+| Communication style (always on) | `caveman.mdc` | `caveman/SKILL.md` |
+| React components, pages, context | `frontend-react.mdc` | `frontend-react/SKILL.md` |
+| Tailwind CSS v4 styling | `styling-tailwind.mdc` | `styling-tailwind/SKILL.md` |
+| TypeScript / domain types | `typescript.mdc` | `typescript/SKILL.md` |
+| React Router routes | `routing.mdc` | `routing/SKILL.md` |
+
+These rules define the non-negotiable patterns of this project. **Do not break established conventions.** If a request would require violating a rule, say so explicitly and propose a compliant alternative.
+
+> **Portability:** Tech rules/skills above are stack-focused. Product/domain context stays in this `.cursorrules` — do not bake Cardápio Livre copy into skills.
+
+---
+
+## Evolving rules
+
+If you identify a new pattern or standard that would help the project and is not documented yet, confirm with the user before adding it. Once confirmed:
+
+- New or updated architecture standards → `.cursor/rules/` (router) + `.cursor/skills/` (detailed guidance)
+- Update the reference table above when adding a new rule/skill pair.
+
+---
+
+## Commands
+
+```bash
+# Install dependencies
+bun install
+
+# Dev server (Vite on :5173)
+bun run dev
+
+# Type-check
+bun run lint
+
+# Production build
+bun run build
+
+# Preview production build
+bun run preview
+```
+
+No env file required for local demo. Quote email target is hardcoded in `src/lib/email.ts`.
+
+---
+
+## Project structure
+
+```
+src/
+├── components/
+│   └── QuoteModal.tsx   # Lead form modal
+├── context/
+│   └── QuoteContext.tsx # openQuote / closeQuote
+├── data/
+│   └── menus.ts         # Demo menu configs + formatBRL / getMenuBySlug
+├── lib/
+│   └── email.ts         # FormSubmit quote submit
+├── pages/
+│   ├── LandingPage.tsx  # Marketing LP
+│   └── MenuPage.tsx     # Demo cardápio + cart
+├── types.ts             # QuoteFormData, MenuConfig, CartLine, …
+├── index.css            # Tailwind v4 + @theme tokens
+├── App.tsx              # BrowserRouter + routes
+└── main.tsx
+
+public/                  # favicon, icons
+vite.config.ts
+index.html
+```
+
+---
+
+## Architecture conventions
+
+- **Routing:** Routes live in `src/App.tsx` (`/` and `/cardapio/:slug`). Use `basename` from `import.meta.env.BASE_URL` when needed.
+- **Imports:** Relative imports within `src/` (no `@/` alias today). Named exports for pages/components; `App` may stay default for Vite entry.
+- **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`. Tokens in `src/index.css` `@theme` (`ink`, `lime`, `accent`, fonts Syne/Manrope). Prefer existing utility classes and theme colors.
+- **Types:** Domain types in `src/types.ts`.
+- **Menus:** Add/edit demos only in `src/data/menus.ts`; slug must match route param.
+- **Quotes:** All CTAs call `openQuote(source)`; do not bypass `QuoteModal` / FormSubmit path without explicit product change.
+- **No backend:** Do not introduce Supabase, serverless `api/`, or auth unless product scope expands and rules/skills are updated.
+
+---
+
+## Brand / UI notes
+
+- Brand: **Cardápio Livre** — lime accent on dark ink greens; Outfit (display) + Manrope (body).
+- Demo menus use per-client `theme` colors from `menus.ts`.
+- Keep marketing copy in Portuguese (pt-BR).
+
+---
+
+## Efficiency
+
+Scope prompts precisely (e.g. one page, one menu slug, quote form field). Less context loaded means fewer tokens and clearer answers.

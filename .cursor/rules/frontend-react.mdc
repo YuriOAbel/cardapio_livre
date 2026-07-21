@@ -1,0 +1,12 @@
+---
+description: Router for React components, pages, and context.
+globs: "{src/components/**,src/pages/**,src/context/**,src/hooks/**}"
+alwaysApply: false
+---
+
+# Rule: Frontend React Router
+
+- If touching `src/components/**`, `src/pages/**`, or `src/context/**`, read and follow
+  `.cursor/skills/frontend-react/SKILL.md`.
+- For Tailwind class conventions, also apply `.cursor/rules/styling-tailwind.mdc`.
+- Source of truth: skill.
