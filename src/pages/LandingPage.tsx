@@ -79,7 +79,7 @@ export function LandingPage() {
           <div className="animate-rise-delay relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-5 shadow-2xl sm:p-6">
               <span className="inline-flex rounded-full bg-lime/90 px-3 py-1 text-xs font-bold text-ink">
-                Preview ao vivo
+                Confira os cardápios entregues:
               </span>
               <div className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
                 {menus.map((m, i) => (
