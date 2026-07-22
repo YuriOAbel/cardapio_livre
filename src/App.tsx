@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QuoteProvider } from './context/QuoteContext'
 import { QuoteModal } from './components/QuoteModal'
 import { ScrollToTop } from './components/ScrollToTop'
+import { WhatsAppFloat } from './components/WhatsAppFloat'
 import { LandingPage } from './pages/LandingPage'
 import { MenuPage } from './pages/MenuPage'
 
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/cardapio/:slug" element={<MenuPage />} />
         </Routes>
         <QuoteModal />
+        <WhatsAppFloat />
       </QuoteProvider>
     </BrowserRouter>
   )

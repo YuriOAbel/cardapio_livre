@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MenuBrandMark } from '../components/MenuBrandMark'
 import { menus } from '../data/menus'
+import { CONTACT, MAILTO_URL, WHATSAPP_URL } from '../lib/contact'
 import { useQuote } from '../context/QuoteContext'
 
 export function LandingPage() {
@@ -308,13 +309,49 @@ export function LandingPage() {
       </section>
 
       <footer className="border-t border-ink/5 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p className="font-display font-bold text-ink">
-            Cardápio<span className="text-accent"> Livre</span>
-          </p>
-          <p className="text-sm text-ink/45">
-            Cardápios digitais para foodservice · © {new Date().getFullYear()}
-          </p>
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-2">
+          <div>
+            <p className="font-display text-lg font-bold text-ink">
+              Cardápio<span className="text-accent"> Livre</span>
+            </p>
+            <dl className="mt-4 space-y-2 text-sm text-ink/65">
+              <div>
+                <dt className="font-semibold text-ink/80">Empresa</dt>
+                <dd>{CONTACT.company}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink/80">CNPJ</dt>
+                <dd>{CONTACT.cnpj}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink/80">Endereço</dt>
+                <dd>{CONTACT.address}</dd>
+              </div>
+            </dl>
+            <p className="mt-4 text-xs text-ink/40">
+              Cardápios digitais para foodservice · © {new Date().getFullYear()}
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-ink">Entre em contato</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-bold text-white transition hover:bg-[#1ebe57]"
+              >
+                WhatsApp
+              </a>
+              <a
+                href={MAILTO_URL}
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-lime transition hover:bg-ink-soft"
+              >
+                E-mail
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
