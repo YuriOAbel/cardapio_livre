@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { sendQuoteEmail } from '../lib/email'
+import { reportQuoteConversion } from '../lib/gtag'
 import type { BusinessArea, QuoteFormData } from '../types'
 import { useQuote } from '../context/QuoteContext'
 
@@ -52,6 +53,7 @@ export function QuoteModal() {
     setStatus('loading')
     try {
       await sendQuoteEmail({ ...form, source })
+      reportQuoteConversion()
       setStatus('success')
     } catch {
       setStatus('error')
