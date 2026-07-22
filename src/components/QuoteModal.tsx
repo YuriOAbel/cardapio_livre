@@ -1,37 +1,23 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { sendQuoteEmail } from '../lib/email'
 import { reportQuoteConversion } from '../lib/gtag'
-import type { BusinessArea, QuoteFormData } from '../types'
+import type { QuoteFormData } from '../types'
 import { useQuote } from '../context/QuoteContext'
-
-const AREAS: { value: BusinessArea; label: string }[] = [
-  { value: 'lanchonete', label: 'Lanchonete' },
-  { value: 'sorveteria', label: 'Sorveteria' },
-  { value: 'cafeteria', label: 'Cafeteria' },
-  { value: 'restaurante', label: 'Restaurante' },
-  { value: 'pizzaria', label: 'Pizzaria' },
-  { value: 'outro', label: 'Outro' },
-]
 
 const empty: QuoteFormData = {
   name: '',
-  businessName: '',
-  area: '',
-  estimatedProducts: '',
-  hasWebsite: '',
-  hasLogo: '',
-  email: '',
   whatsapp: '',
+  email: '',
 }
 
 export function QuoteModal() {
-  const { isOpen, closeQuote, source, initialArea } = useQuote()
+  const { isOpen, closeQuote, source } = useQuote()
   const [form, setForm] = useState<QuoteFormData>(empty)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   useEffect(() => {
     if (isOpen) {
-      setForm({ ...empty, area: initialArea })
+      setForm(empty)
       setStatus('idle')
       document.body.style.overflow = 'hidden'
     } else {
@@ -40,7 +26,7 @@ export function QuoteModal() {
     return () => {
       document.body.style.overflow = ''
     }
-  }, [isOpen, initialArea])
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -111,7 +97,7 @@ export function QuoteModal() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 px-5 py-5">
-            <Field label="Seu nome" required>
+            <Field label="Nome" required>
               <input
                 required
                 value={form.name}
@@ -119,94 +105,6 @@ export function QuoteModal() {
                 className="field"
                 placeholder="Como podemos te chamar?"
                 autoComplete="name"
-              />
-            </Field>
-
-            <Field label="Nome do negócio" required>
-              <input
-                required
-                value={form.businessName}
-                onChange={(e) => update('businessName', e.target.value)}
-                className="field"
-                placeholder="Ex.: Burguer Sport"
-              />
-            </Field>
-
-            <Field label="Área de atuação" required>
-              <select
-                required
-                value={form.area}
-                onChange={(e) => update('area', e.target.value as QuoteFormData['area'])}
-                className="field"
-              >
-                <option value="" disabled>
-                  Selecione...
-                </option>
-                {AREAS.map((a) => (
-                  <option key={a.value} value={a.value}>
-                    {a.label}
-                  </option>
-                ))}
-              </select>
-            </Field>
-
-            <Field label="Quantos produtos você estima vender?" required>
-              <select
-                required
-                value={form.estimatedProducts}
-                onChange={(e) => update('estimatedProducts', e.target.value)}
-                className="field"
-              >
-                <option value="" disabled>
-                  Selecione...
-                </option>
-                <option value="ate-20">Até 20 produtos</option>
-                <option value="21-50">21 a 50 produtos</option>
-                <option value="51-100">51 a 100 produtos</option>
-                <option value="mais-100">Mais de 100 produtos</option>
-              </select>
-            </Field>
-
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Possui site?" required>
-                <select
-                  required
-                  value={form.hasWebsite}
-                  onChange={(e) => update('hasWebsite', e.target.value as QuoteFormData['hasWebsite'])}
-                  className="field"
-                >
-                  <option value="" disabled>
-                    —
-                  </option>
-                  <option value="sim">Sim</option>
-                  <option value="nao">Não</option>
-                </select>
-              </Field>
-              <Field label="Possui logo?" required>
-                <select
-                  required
-                  value={form.hasLogo}
-                  onChange={(e) => update('hasLogo', e.target.value as QuoteFormData['hasLogo'])}
-                  className="field"
-                >
-                  <option value="" disabled>
-                    —
-                  </option>
-                  <option value="sim">Sim</option>
-                  <option value="nao">Não</option>
-                </select>
-              </Field>
-            </div>
-
-            <Field label="E-mail" required>
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(e) => update('email', e.target.value)}
-                className="field"
-                placeholder="seu@email.com"
-                autoComplete="email"
               />
             </Field>
 
@@ -219,6 +117,18 @@ export function QuoteModal() {
                 className="field"
                 placeholder="(11) 99999-9999"
                 autoComplete="tel"
+              />
+            </Field>
+
+            <Field label="E-mail" required>
+              <input
+                required
+                type="email"
+                value={form.email}
+                onChange={(e) => update('email', e.target.value)}
+                className="field"
+                placeholder="seu@email.com"
+                autoComplete="email"
               />
             </Field>
 

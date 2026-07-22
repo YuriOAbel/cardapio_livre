@@ -1,20 +1,7 @@
-export type BusinessArea =
-  | 'lanchonete'
-  | 'sorveteria'
-  | 'cafeteria'
-  | 'restaurante'
-  | 'pizzaria'
-  | 'outro'
-
 export type QuoteFormData = {
   name: string
-  businessName: string
-  area: BusinessArea | ''
-  estimatedProducts: string
-  hasWebsite: 'sim' | 'nao' | ''
-  hasLogo: 'sim' | 'nao' | ''
-  email: string
   whatsapp: string
+  email: string
   source?: string
 }
 

@@ -4,17 +4,12 @@ const QUOTE_EMAIL = 'sistemasoliveira.abel@gmail.com'
 
 export async function sendQuoteEmail(data: QuoteFormData): Promise<void> {
   const body = {
-    _subject: `[Cardápio Livre] Nova cotação — ${data.businessName}`,
+    _subject: `[Cardápio Livre] Nova cotação — ${data.name}`,
     _template: 'table',
     _captcha: 'false',
     nome: data.name,
-    negocio: data.businessName,
-    area_atuacao: data.area,
-    produtos_estimados: data.estimatedProducts,
-    possui_site: data.hasWebsite,
-    possui_logo: data.hasLogo,
-    email: data.email,
     whatsapp: data.whatsapp,
+    email: data.email,
     origem_cta: data.source || 'formulario',
   }
 
