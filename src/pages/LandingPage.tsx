@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { MenuBrandMark } from '../components/MenuBrandMark'
-import { menus } from '../data/menus'
+import { homeMenus } from '../data/menus'
 import { CONTACT, MAILTO_URL, WHATSAPP_URL } from '../lib/contact'
 import { useQuote } from '../context/QuoteContext'
 
@@ -83,7 +83,7 @@ export function LandingPage() {
                 Confira os cardápios entregues:
               </span>
               <div className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
-                {menus.map((m, i) => (
+                {homeMenus.map((m, i) => (
                   <Link
                     key={m.slug}
                     to={`/cardapio/${m.slug}`}
@@ -144,7 +144,7 @@ export function LandingPage() {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {menus.map((m) => (
+          {homeMenus.map((m) => (
             <article
               key={m.slug}
               className="group flex flex-col overflow-hidden rounded-3xl border border-ink/8 bg-white transition hover:shadow-xl"

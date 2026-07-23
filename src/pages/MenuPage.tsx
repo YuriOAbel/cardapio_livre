@@ -6,6 +6,16 @@ import { formatBRL, getMenuBySlug } from '../data/menus'
 import type { CartLine, MenuItem } from '../types'
 import { useQuote } from '../context/QuoteContext'
 
+/** Dark ink text on light accents (e.g. gold); white on dark primaries. */
+function contrastOn(hex: string): string {
+  const h = hex.replace('#', '')
+  if (h.length < 6) return '#ffffff'
+  const r = Number.parseInt(h.slice(0, 2), 16)
+  const g = Number.parseInt(h.slice(2, 4), 16)
+  const b = Number.parseInt(h.slice(4, 6), 16)
+  return (r * 299 + g * 587 + b * 114) / 1000 > 160 ? '#212024' : '#ffffff'
+}
+
 export function MenuPage() {
   const { slug = '' } = useParams()
   const menu = getMenuBySlug(slug)
@@ -25,6 +35,9 @@ export function MenuPage() {
   const count = cart.reduce((sum, l) => sum + l.qty, 0)
 
   if (!menu) return <Navigate to="/" replace />
+
+  const onPrimary = contrastOn(menu.theme.primary)
+  const onAccent = contrastOn(menu.theme.accent)
 
   function addItem(item: MenuItem) {
     setCart((prev) => {
@@ -72,16 +85,21 @@ export function MenuPage() {
       </div>
 
       <header
-        className="relative overflow-hidden text-white"
+        className="relative overflow-hidden"
         style={{
           background: `linear-gradient(160deg, ${menu.theme.primary} 0%, ${menu.theme.accent} 100%)`,
+          color: onPrimary,
         }}
       >
         <div className="mx-auto max-w-lg px-4 pb-8 pt-4">
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold backdrop-blur hover:bg-white/25"
+              className="rounded-full px-3 py-1.5 text-xs font-semibold backdrop-blur"
+              style={{
+                background: onPrimary === '#ffffff' ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
+                color: onPrimary,
+              }}
             >
               ← Voltar à LP
             </Link>
@@ -109,7 +127,7 @@ export function MenuPage() {
                 {menu.area} · {menu.city}
               </p>
               <h1 className="font-display text-3xl font-extrabold sm:text-4xl">{menu.clientName}</h1>
-              <p className="mt-1 text-white/85">{menu.tagline}</p>
+              <p className="mt-1 opacity-85">{menu.tagline}</p>
             </div>
             <MenuBrandMark menu={menu} variant="wordmark" size="lg" onDark />
           </div>
@@ -158,7 +176,7 @@ export function MenuPage() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="font-bold text-ink">{item.name}</h3>
-                        <span className="shrink-0 font-bold" style={{ color: menu.theme.primary }}>
+                        <span className="shrink-0 font-bold text-ink">
                           {formatBRL(item.price)}
                         </span>
                       </div>
@@ -166,8 +184,8 @@ export function MenuPage() {
                       <button
                         type="button"
                         onClick={() => addItem(item)}
-                        className="mt-2 rounded-full px-3 py-1 text-xs font-bold text-white transition active:scale-95"
-                        style={{ background: menu.theme.primary }}
+                        className="mt-2 rounded-full px-3 py-1 text-xs font-bold transition active:scale-95"
+                        style={{ background: menu.theme.primary, color: onPrimary }}
                       >
                         Adicionar
                       </button>
@@ -185,8 +203,8 @@ export function MenuPage() {
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            className="mx-auto flex w-full max-w-lg items-center justify-between rounded-2xl px-5 py-4 font-bold text-white shadow-2xl"
-            style={{ background: menu.theme.primary }}
+            className="mx-auto flex w-full max-w-lg items-center justify-between rounded-2xl px-5 py-4 font-bold shadow-2xl"
+            style={{ background: menu.theme.primary, color: onPrimary }}
           >
             <span>Ver carrinho ({count})</span>
             <span>{formatBRL(total)}</span>
@@ -263,8 +281,8 @@ export function MenuPage() {
                   <button
                     type="button"
                     onClick={finishOrder}
-                    className="w-full rounded-full py-3.5 font-bold text-white transition active:scale-[0.98]"
-                    style={{ background: menu.theme.accent }}
+                    className="w-full rounded-full py-3.5 font-bold transition active:scale-[0.98]"
+                    style={{ background: menu.theme.accent, color: onAccent }}
                   >
                     Finalizar pedido
                   </button>
@@ -286,8 +304,8 @@ export function MenuPage() {
           />
           <div className="relative z-10 w-full max-w-sm rounded-3xl bg-white p-8 text-center shadow-2xl animate-rise">
             <div
-              className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full text-3xl text-white"
-              style={{ background: menu.theme.primary }}
+              className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full text-3xl"
+              style={{ background: menu.theme.primary, color: onPrimary }}
             >
               ✓
             </div>
@@ -299,8 +317,8 @@ export function MenuPage() {
             <button
               type="button"
               onClick={() => setConfirmed(false)}
-              className="mt-6 w-full rounded-full py-3 font-bold text-white"
-              style={{ background: menu.theme.primary }}
+              className="mt-6 w-full rounded-full py-3 font-bold"
+              style={{ background: menu.theme.primary, color: onPrimary }}
             >
               Continuar explorando
             </button>

@@ -2,6 +2,8 @@ import type { MenuConfig } from '../types'
 import gelateriaAuroraLogo from '../assets/gelateria-aurora-wordmark.svg'
 import burguerSportIcon from '../assets/burguer-sport-icon.svg'
 import burguerSportWordmark from '../assets/burguer-sport-wordmark.svg'
+import brendaFoodsIcon from '../assets/brenda-foods-icon.svg'
+import brendaFoodsWordmark from '../assets/brenda-foods-wordmark.svg'
 import cafeNuvemIcon from '../assets/cafe-nuvem-icon.svg'
 import cafeNuvemWordmark from '../assets/cafe-nuvem-wordmark.svg'
 import imgCasquinha from '../assets/gelateria-aurora/casquinha-classica.jpg'
@@ -168,6 +170,78 @@ export const menus: MenuConfig[] = [
     ],
   },
   {
+    slug: 'brenda-foods',
+    clientName: 'Brenda Foods',
+    tagline: 'Burgers no ponto, sabor de verdade',
+    area: 'Lanchonete',
+    city: 'São Paulo/SP',
+    theme: {
+      primary: '#DDC837',
+      secondary: '#F5E6A3',
+      accent: '#C89829',
+      bg: '#212024',
+    },
+    coverEmoji: '🍔',
+    logoIconSrc: brendaFoodsIcon,
+    logoWordmarkSrc: brendaFoodsWordmark,
+    items: [
+      {
+        id: 'bf-1',
+        name: 'Smash Duplo',
+        description: 'Dois blends 90g, queijo cheddar e molho da casa',
+        price: 32,
+        category: 'Burgers',
+        emoji: '🍔',
+        imageSrc: imgSmashDuplo,
+      },
+      {
+        id: 'bf-2',
+        name: 'Chicken Crispy',
+        description: 'Frango empanado, alface, tomate e maionese especial',
+        price: 28,
+        category: 'Burgers',
+        emoji: '🍗',
+        imageSrc: imgChickenCrispy,
+      },
+      {
+        id: 'bf-3',
+        name: 'Batata Rustica',
+        description: 'Porção 400g com alecrim e páprica',
+        price: 18,
+        category: 'Porções',
+        emoji: '🍟',
+        imageSrc: imgBatataRustica,
+      },
+      {
+        id: 'bf-4',
+        name: 'Onion Rings',
+        description: 'Anéis crocantes com molho barbecue',
+        price: 16,
+        category: 'Porções',
+        emoji: '🧅',
+        imageSrc: imgOnionRings,
+      },
+      {
+        id: 'bf-5',
+        name: 'Refrigerante Lata',
+        description: 'Coca, Guaraná ou Sprite 350ml',
+        price: 7,
+        category: 'Bebidas',
+        emoji: '🥫',
+        imageSrc: imgRefrigeranteLata,
+      },
+      {
+        id: 'bf-6',
+        name: 'Milkshake Oreo',
+        description: 'Shake cremoso com biscoito e calda de chocolate',
+        price: 20,
+        category: 'Bebidas',
+        emoji: '🥛',
+        imageSrc: imgMilkshakeOreo,
+      },
+    ],
+  },
+  {
     slug: 'cafeteria',
     clientName: 'Café Nuvem',
     tagline: 'Grãos especiais e brunch leve',
@@ -244,6 +318,9 @@ export const menus: MenuConfig[] = [
 export function getMenuBySlug(slug: string): MenuConfig | undefined {
   return menus.find((m) => m.slug === slug)
 }
+
+/** Menus listed on the marketing LP (hidden demos stay reachable by slug). */
+export const homeMenus: MenuConfig[] = menus.filter((m) => m.slug !== 'brenda-foods')
 
 export function formatBRL(value: number): string {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
