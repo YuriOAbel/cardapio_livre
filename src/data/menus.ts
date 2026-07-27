@@ -2,8 +2,7 @@ import type { MenuConfig } from '../types'
 import gelateriaAuroraLogo from '../assets/gelateria-aurora-wordmark.svg'
 import burguerSportIcon from '../assets/burguer-sport-icon.svg'
 import burguerSportWordmark from '../assets/burguer-sport-wordmark.svg'
-import brendaFoodsIcon from '../assets/brenda-foods-icon.svg'
-import brendaFoodsWordmark from '../assets/brenda-foods-wordmark.svg'
+import villaBurgerMasterLogo from '../assets/villa-burger/villa-burger-master-logo.svg'
 import cafeNuvemIcon from '../assets/cafe-nuvem-icon.svg'
 import cafeNuvemWordmark from '../assets/cafe-nuvem-wordmark.svg'
 import imgCasquinha from '../assets/gelateria-aurora/casquinha-classica.jpg'
@@ -170,8 +169,8 @@ export const menus: MenuConfig[] = [
     ],
   },
   {
-    slug: 'brenda-foods',
-    clientName: 'Brenda Foods',
+    slug: 'villa-burger-master',
+    clientName: 'Villa Burger Master',
     tagline: 'Burgers no ponto, sabor de verdade',
     area: 'Lanchonete',
     city: 'São Paulo/SP',
@@ -182,11 +181,11 @@ export const menus: MenuConfig[] = [
       bg: '#212024',
     },
     coverEmoji: '🍔',
-    logoIconSrc: brendaFoodsIcon,
-    logoWordmarkSrc: brendaFoodsWordmark,
+    logoIconSrc: villaBurgerMasterLogo,
+    logoWordmarkSrc: villaBurgerMasterLogo,
     items: [
       {
-        id: 'bf-1',
+        id: 'vbm-1',
         name: 'Smash Duplo',
         description: 'Dois blends 90g, queijo cheddar e molho da casa',
         price: 32,
@@ -195,7 +194,7 @@ export const menus: MenuConfig[] = [
         imageSrc: imgSmashDuplo,
       },
       {
-        id: 'bf-2',
+        id: 'vbm-2',
         name: 'Chicken Crispy',
         description: 'Frango empanado, alface, tomate e maionese especial',
         price: 28,
@@ -204,7 +203,7 @@ export const menus: MenuConfig[] = [
         imageSrc: imgChickenCrispy,
       },
       {
-        id: 'bf-3',
+        id: 'vbm-3',
         name: 'Batata Rustica',
         description: 'Porção 400g com alecrim e páprica',
         price: 18,
@@ -213,7 +212,7 @@ export const menus: MenuConfig[] = [
         imageSrc: imgBatataRustica,
       },
       {
-        id: 'bf-4',
+        id: 'vbm-4',
         name: 'Onion Rings',
         description: 'Anéis crocantes com molho barbecue',
         price: 16,
@@ -222,7 +221,7 @@ export const menus: MenuConfig[] = [
         imageSrc: imgOnionRings,
       },
       {
-        id: 'bf-5',
+        id: 'vbm-5',
         name: 'Refrigerante Lata',
         description: 'Coca, Guaraná ou Sprite 350ml',
         price: 7,
@@ -231,7 +230,7 @@ export const menus: MenuConfig[] = [
         imageSrc: imgRefrigeranteLata,
       },
       {
-        id: 'bf-6',
+        id: 'vbm-6',
         name: 'Milkshake Oreo',
         description: 'Shake cremoso com biscoito e calda de chocolate',
         price: 20,
@@ -315,12 +314,20 @@ export const menus: MenuConfig[] = [
   },
 ]
 
+const HIDDEN_FROM_HOME = new Set(['villa-burger-master', 'brenda-foods'])
+
+/** Old slug kept so shared links still resolve. */
+const SLUG_ALIASES: Record<string, string> = {
+  'brenda-foods': 'villa-burger-master',
+}
+
 export function getMenuBySlug(slug: string): MenuConfig | undefined {
-  return menus.find((m) => m.slug === slug)
+  const resolved = SLUG_ALIASES[slug] ?? slug
+  return menus.find((m) => m.slug === resolved)
 }
 
 /** Menus listed on the marketing LP (hidden demos stay reachable by slug). */
-export const homeMenus: MenuConfig[] = menus.filter((m) => m.slug !== 'brenda-foods')
+export const homeMenus: MenuConfig[] = menus.filter((m) => !HIDDEN_FROM_HOME.has(m.slug))
 
 export function formatBRL(value: number): string {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })

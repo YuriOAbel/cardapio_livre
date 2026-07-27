@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
-  <title id="title">Brenda Foods</title>
-  <rect width="96" height="96" rx="22" fill="#212024"/>
-  <circle cx="48" cy="48" r="28" fill="none" stroke="#DDC837" stroke-width="4"/>
-  <path
-    fill="#DDC837"
-    d="M28 42h40c1.5 0 2.5 1.4 2 2.7l-3.2 8.6A6 6 0 0 1 61.1 57H34.9a6 6 0 0 1-5.7-3.7L26 44.7c-.5-1.3.5-2.7 2-2.7zm6 22h28a3 3 0 0 1 0 6H34a3 3 0 0 1 0-6zm4-28a3 3 0 0 1 3-3h18a3 3 0 0 1 0 6H41a3 3 0 0 1-3-3z"
-  />
-</svg>

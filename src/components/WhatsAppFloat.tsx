@@ -1,9 +1,18 @@
+import { type MouseEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { WHATSAPP_URL } from '../lib/contact'
+import { reportQuoteConversion } from '../lib/gtag'
 
 export function WhatsAppFloat() {
   const { pathname } = useLocation()
   const onMenu = pathname.startsWith('/cardapio')
+
+  function handleClick(e: MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault()
+    reportQuoteConversion(() => {
+      window.open(WHATSAPP_URL, '_blank', 'noopener,noreferrer')
+    })
+  }
 
   return (
     <a
@@ -11,6 +20,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
+      onClick={handleClick}
       className={`fixed right-4 z-[45] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:scale-105 hover:bg-[#1ebe57] sm:right-6 ${
         onMenu ? 'bottom-24' : 'bottom-6 sm:bottom-8'
       }`}
