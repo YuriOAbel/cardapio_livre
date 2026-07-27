@@ -227,7 +227,7 @@ export function LandingPage() {
             </p>
           </div>
 
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-[1.6rem] sm:mt-8">
             <PortfolioCarousel photos={portfolioPhotos} />
           </div>
 
