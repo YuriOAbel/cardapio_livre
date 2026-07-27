@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { MenuBrandMark } from '../components/MenuBrandMark'
+import { PortfolioCarousel } from '../components/PortfolioCarousel'
 import { homeMenus } from '../data/menus'
+import { portfolioPhotos } from '../data/portfolioPhotos'
 import { CONTACT, MAILTO_URL, WHATSAPP_URL } from '../lib/contact'
 import { useQuote } from '../context/QuoteContext'
 
@@ -206,6 +208,38 @@ export function LandingPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* Professional photo portfolio */}
+      <section id="portfolio" className="overflow-x-hidden border-y border-ink/5 bg-warm">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-bold uppercase tracking-widest text-accent">
+              Fotos profissionais
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-extrabold leading-[1.2] text-ink sm:text-4xl text-balance">
+              O seu negócio está profissional?
+            </h2>
+            <p className="mt-3 text-ink/65 leading-relaxed">
+              77% dos clientes escolhem seus pedidos observando as fotos. Aqui você recebe todo o
+              portfólio profissional de produtos — aproveite!
+            </p>
+          </div>
+
+          <div className="mt-8 sm:mt-10">
+            <PortfolioCarousel photos={portfolioPhotos} />
+          </div>
+
+          <div className="mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => openQuote('portfolio-quero')}
+              className="inline-flex h-12 items-center justify-center rounded-full bg-ink px-8 font-bold text-lime transition hover:bg-ink-soft"
+            >
+              Quero o meu
+            </button>
+          </div>
         </div>
       </section>
 
