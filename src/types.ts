@@ -29,6 +29,8 @@ export type MenuConfig = {
     bg: string
   }
   coverEmoji: string
+  /** Hero / case-card photo (menu header, LP showcase). */
+  coverImageSrc?: string
   /** Square brand icon (preview chips, case cards). */
   logoIconSrc?: string
   /** Wordmark for menu header / large brand spots. */

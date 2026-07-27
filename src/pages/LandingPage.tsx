@@ -151,21 +151,35 @@ export function LandingPage() {
             >
               <div
                 className="relative flex h-44 items-end overflow-hidden p-5"
-                style={{ background: m.theme.secondary }}
+                style={{ background: m.coverImageSrc ? undefined : m.theme.secondary }}
               >
-                {m.logoWordmarkSrc && (
-                  <img
-                    src={m.logoWordmarkSrc}
-                    alt=""
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 h-full w-full object-contain p-8 pb-16 opacity-95 transition duration-300 group-hover:scale-105"
-                  />
+                {m.coverImageSrc ? (
+                  <>
+                    <img
+                      src={m.coverImageSrc}
+                      alt=""
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
+                  </>
+                ) : (
+                  m.logoWordmarkSrc && (
+                    <img
+                      src={m.logoWordmarkSrc}
+                      alt=""
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 h-full w-full object-contain p-8 pb-16 opacity-95 transition duration-300 group-hover:scale-105"
+                    />
+                  )
                 )}
                 <span className="absolute right-3 top-3 z-10 transition group-hover:scale-105">
                   <MenuBrandMark menu={m} variant="icon" size="md" onDark />
                 </span>
-                <div className="relative z-10 text-ink">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                <div className={`relative z-10 ${m.coverImageSrc ? 'text-white' : 'text-ink'}`}>
+                  <p
+                    className={`text-xs font-semibold uppercase tracking-wider ${m.coverImageSrc ? 'text-white/75' : 'text-ink/55'}`}
+                  >
                     Cliente · {m.city}
                   </p>
                   <h3 className="font-display text-2xl font-bold">{m.clientName}</h3>

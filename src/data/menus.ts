@@ -11,18 +11,21 @@ import imgMilkshake from '../assets/gelateria-aurora/milkshake-morango.jpg'
 import imgAcai from '../assets/gelateria-aurora/acai-bowl-500ml.jpg'
 import imgPicole from '../assets/gelateria-aurora/picole-gourmet.jpg'
 import imgBananaSplit from '../assets/gelateria-aurora/banana-split.jpg'
+import gelateriaAuroraCapa from '../assets/gelateria-aurora/gelateria-aurora-capa.png'
 import imgSmashDuplo from '../assets/burguer-sport/smash-duplo.jpg'
 import imgChickenCrispy from '../assets/burguer-sport/chicken-crispy.jpg'
 import imgBatataRustica from '../assets/burguer-sport/batata-rustica.jpg'
 import imgOnionRings from '../assets/burguer-sport/onion-rings.jpg'
 import imgRefrigeranteLata from '../assets/burguer-sport/refrigerante-lata.jpg'
 import imgMilkshakeOreo from '../assets/burguer-sport/milkshake-oreo.jpg'
+import burguerSportCapa from '../assets/burguer-sport/burguer-sport-capa.png'
 import imgEspressoDuplo from '../assets/cafe-nuvem/espresso-duplo.jpg'
 import imgCappuccinoCremoso from '../assets/cafe-nuvem/cappuccino-cremoso.jpg'
 import imgCroissantAmendoas from '../assets/cafe-nuvem/croissant-amendoas.jpg'
 import imgPaoNaChapa from '../assets/cafe-nuvem/pao-na-chapa.jpg'
 import imgBowlAcaiGranola from '../assets/cafe-nuvem/bowl-acai-granola.jpg'
 import imgChaGeladoHibisco from '../assets/cafe-nuvem/cha-gelado-hibisco.jpg'
+import cafeNuvemCapa from '../assets/cafe-nuvem/cafe-nuvem-capa.png'
 
 export const menus: MenuConfig[] = [
   {
@@ -38,6 +41,7 @@ export const menus: MenuConfig[] = [
       bg: '#FDF7FF',
     },
     coverEmoji: '🍦',
+    coverImageSrc: gelateriaAuroraCapa,
     logoWordmarkSrc: gelateriaAuroraLogo,
     items: [
       {
@@ -109,6 +113,7 @@ export const menus: MenuConfig[] = [
       bg: '#FFFBEB',
     },
     coverEmoji: '🍔',
+    coverImageSrc: burguerSportCapa,
     logoIconSrc: burguerSportIcon,
     logoWordmarkSrc: burguerSportWordmark,
     items: [
@@ -253,6 +258,7 @@ export const menus: MenuConfig[] = [
       bg: '#FAF6F1',
     },
     coverEmoji: '☕',
+    coverImageSrc: cafeNuvemCapa,
     logoIconSrc: cafeNuvemIcon,
     logoWordmarkSrc: cafeNuvemWordmark,
     items: [

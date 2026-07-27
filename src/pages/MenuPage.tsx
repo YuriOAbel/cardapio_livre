@@ -38,6 +38,7 @@ export function MenuPage() {
 
   const onPrimary = contrastOn(menu.theme.primary)
   const onAccent = contrastOn(menu.theme.accent)
+  const onCover = menu.coverImageSrc ? '#ffffff' : onPrimary
 
   function addItem(item: MenuItem) {
     setCart((prev) => {
@@ -87,18 +88,37 @@ export function MenuPage() {
       <header
         className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(160deg, ${menu.theme.primary} 0%, ${menu.theme.accent} 100%)`,
-          color: onPrimary,
+          background: menu.coverImageSrc
+            ? undefined
+            : `linear-gradient(160deg, ${menu.theme.primary} 0%, ${menu.theme.accent} 100%)`,
+          color: onCover,
         }}
       >
-        <div className="mx-auto max-w-lg px-4 pb-8 pt-4">
+        {menu.coverImageSrc && (
+          <>
+            <img
+              src={menu.coverImageSrc}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full object-cover"
+              decoding="async"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.45) 100%)`,
+              }}
+            />
+          </>
+        )}
+        <div className="relative z-10 mx-auto max-w-lg px-4 pb-8 pt-4">
           <div className="flex items-center justify-between">
             <Link
               to="/"
               className="rounded-full px-3 py-1.5 text-xs font-semibold backdrop-blur"
               style={{
-                background: onPrimary === '#ffffff' ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
-                color: onPrimary,
+                background: onCover === '#ffffff' ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
+                color: onCover,
               }}
             >
               ← Voltar à LP
