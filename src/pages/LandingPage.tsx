@@ -1,10 +1,73 @@
 import { Link } from 'react-router-dom'
 import { MenuBrandMark } from '../components/MenuBrandMark'
 import { PortfolioCarousel } from '../components/PortfolioCarousel'
+import { QuoteForm } from '../components/QuoteForm'
 import { homeMenus } from '../data/menus'
 import { portfolioPhotos } from '../data/portfolioPhotos'
+import avatar01 from '../assets/avatar/avatar-01.jpg'
+import avatar02 from '../assets/avatar/avatar-2.png'
+import avatar03 from '../assets/avatar/avatar-3.png'
 import { CONTACT, MAILTO_URL, WHATSAPP_URL } from '../lib/contact'
 import { useQuote } from '../context/QuoteContext'
+
+const testimonials = [
+  {
+    name: 'Marina Santos',
+    business: 'Sabor da Vila Lanches',
+    avatarSrc: avatar02,
+    result: '+38% nos pedidos no 1º mês',
+    message:
+      'Eu precisava organizar pedidos no WhatsApp sem confusão. Com o Cardápio Livre, meu atendimento ficou rápido e os clientes compram com mais segurança.',
+  },
+  {
+    name: 'Rafael Costa',
+    business: 'Café Estação 27',
+    avatarSrc: avatar01,
+    result: 'Zero pedido perdido no balcão',
+    message:
+      'O cardápio digital facilitou muito rotina da equipe. Agora cliente escolhe com calma e chega no caixa já decidido, sem fila travando atendimento.',
+  },
+  {
+    name: 'Aline Lima',
+    business: 'Doce Brisa Açaí',
+    avatarSrc: avatar03,
+    result: 'Aumento de 52% no faturamento',
+    message:
+      'Indico para quem quer aumentar vendas sem depender de marketplace. O link ficou lindo, fácil de usar e melhorou muito percepção do meu negócio.',
+  },
+]
+
+type PlanFeature = { label: string; isNew?: boolean }
+
+const planFeatures: PlanFeature[] = [
+  { label: 'Criação de logotipo profissional' },
+  { label: 'Identidade visual completa' },
+  { label: 'Fotos profissionais dos produtos' },
+  { label: 'Edição e tratamento das fotos' },
+  { label: 'Cardápio digital responsivo' },
+  { label: 'Cardápio via QR Code' },
+  { label: 'Link com domínio próprio' },
+  { label: 'Pedidos organizados no WhatsApp' },
+  { label: 'Sistema de delivery online' },
+  { label: 'Pagamento online integrado' },
+  { label: 'Dashboard de pedidos' },
+  { label: 'Sistema de cupons de desconto', isNew: true },
+  { label: 'Fidelização de clientes', isNew: true },
+  { label: 'Suporte direto pelo WhatsApp' },
+  { label: 'Setup em até 10 dias' },
+  { label: 'Sem taxa de marketplace' },
+  { label: 'Planos flexíveis' },
+]
+
+const plan = {
+  name: 'Completo',
+  description:
+    'A casa arrumada e o sistema rodando: visual, tecnologia e gestão em um só pacote.',
+  fromPrice: 'R$189',
+  price: 'R$99',
+  features: planFeatures,
+  ctaSource: 'plano-completo',
+} as const
 
 export function LandingPage() {
   const { openQuote } = useQuote()
@@ -19,6 +82,9 @@ export function LandingPage() {
           <nav className="hidden items-center gap-6 text-sm font-semibold text-ink/70 md:flex">
             <a href="#modelos" className="hover:text-ink transition">
               Modelos
+            </a>
+            <a href="#planos" className="hover:text-ink transition">
+              Planos
             </a>
             <a href="#vantagens" className="hover:text-ink transition">
               Vantagens
@@ -56,57 +122,48 @@ export function LandingPage() {
               Cardápio Livre
             </p>
             <h1 className="animate-rise-delay mt-5 max-w-xl font-display text-2xl font-bold leading-[1.25] text-white text-balance sm:text-3xl md:text-4xl">
-              Seu cardápio online, pedidos no WhatsApp — sem taxa de marketplace.
+              Nos tornamos seu negócio profissional com cardápio digital, sistema de gestão e sem
+              taxa de marketplace
             </h1>
             <p className="animate-rise-delay-2 mt-4 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
-              Entregamos cardápios digitais prontos para vender. Veja três negócios reais que já
-              usam o nosso modelo.
+              Aumente as vendas do seu negócio em até 63% com cardápios digitais prontos para
+              vender.
             </p>
             <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => openQuote('hero-comece')}
+              <a
+                href="#cotacao"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const el = document.getElementById('cotacao-nome')
+                  document.getElementById('cotacao')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                  el?.focus({ preventScroll: true })
+                }}
                 className="inline-flex h-12 items-center justify-center rounded-full bg-lime px-7 font-bold text-ink transition hover:bg-lime-deep"
               >
                 Comece agora
-              </button>
+              </a>
               <a
-                href="#modelos"
+                href="#planos"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 px-7 font-semibold text-white transition hover:bg-white/10"
               >
-                Ver exemplos
+                Ver planos
               </a>
             </div>
           </div>
 
           <div className="animate-rise-delay relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-5 shadow-2xl sm:p-6">
-              <span className="inline-flex rounded-full bg-lime/90 px-3 py-1 text-xs font-bold text-ink">
-                Confira os cardápios entregues:
-              </span>
-              <div className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
-                {homeMenus.map((m, i) => (
-                  <Link
-                    key={m.slug}
-                    to={`/cardapio/${m.slug}`}
-                    className="flex items-center gap-3 rounded-2xl bg-white/95 p-3 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
-                    style={{ animationDelay: `${0.4 + i * 0.1}s` }}
-                  >
-                    <span
-                      className="flex h-12 w-14 shrink-0 items-center justify-center rounded-xl"
-                      style={{ background: m.theme.secondary }}
-                    >
-                      <MenuBrandMark menu={m} variant="icon" size="sm" />
-                    </span>
-                    <span className="min-w-0 flex-1 text-left">
-                      <span className="block truncate font-bold text-ink">{m.clientName}</span>
-                      <span className="block truncate text-xs text-ink/55">
-                        {m.area} · {m.city}
-                      </span>
-                    </span>
-                    <span className="text-ink/40">→</span>
-                  </Link>
-                ))}
+            <div
+              id="cotacao"
+              className="relative overflow-hidden rounded-[2rem] bg-white p-5 shadow-2xl sm:p-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-ink/50">
+                Cotação gratuita
+              </p>
+              <h2 className="mt-1 font-display text-xl font-bold text-ink sm:text-2xl">
+                Monte sua proposta
+              </h2>
+              <div className="mt-4">
+                <QuoteForm source="hero-form" variant="hero" />
               </div>
             </div>
           </div>
@@ -129,6 +186,138 @@ export function LandingPage() {
               <p className="mt-1 text-sm text-ink/55">{s.v}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Plans */}
+      <section id="planos" className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-display text-3xl font-extrabold leading-[1.12] text-ink sm:text-4xl md:text-5xl text-balance">
+              Seu delivery parece amador? Isso está custando suas vendas.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-ink/70 sm:text-lg">
+              Você sabia que a aparência do seu cardápio e a facilidade de pagamento podem aumentar
+              em até 63% o volume dos seus pedidos?
+            </p>
+            <p className="mt-3 text-base leading-relaxed text-ink/70 sm:text-lg">
+              Nós criamos a solução definitiva para profissionalizar o seu negócio de alimentação,
+              sem você precisar contratar vários profissionais diferentes.
+            </p>
+            <p className="mt-3 text-base leading-relaxed text-ink/70 sm:text-lg">
+              Por a partir de apenas{' '}
+              <span className="font-bold text-ink">R$99/mês</span>, nós entregamos a casa arrumada e
+              o sistema rodando em até 10 dias.
+            </p>
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <span className="inline-flex rounded-full bg-ink px-5 py-1.5 text-sm font-bold text-lime">
+              Mensal
+            </span>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-lg">
+            <article className="flex flex-col rounded-3xl border-2 border-accent bg-white p-6 shadow-[0_18px_50px_-28px_rgba(255,107,61,0.55)] sm:p-8">
+              <h3 className="font-display text-3xl font-extrabold text-ink sm:text-4xl">
+                {plan.name}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink/60 sm:text-base">
+                {plan.description}
+              </p>
+
+              <div className="mt-6">
+                <p className="font-display text-xl font-bold text-ink/45 line-through sm:text-2xl">
+                  de {plan.fromPrice}/mês
+                </p>
+                <p className="mt-1 text-ink">
+                  <span className="text-sm font-semibold text-ink/55">por </span>
+                  <span className="font-display text-4xl font-extrabold text-ink sm:text-5xl">
+                    {plan.price}
+                  </span>
+                  <span className="text-base font-semibold text-ink/50">/mês</span>
+                </p>
+                <p className="mt-2 text-xs text-ink/45">
+                  *casa arrumada e sistema rodando em até 10 dias
+                </p>
+              </div>
+
+              <ul className="mt-8 flex-1 space-y-3">
+                {plan.features.map((feature) => (
+                  <li key={feature.label} className="flex items-start gap-2.5">
+                    <span
+                      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-base font-bold text-lime-deep"
+                      aria-hidden
+                    >
+                      ✓
+                    </span>
+                    <span className="text-sm font-medium leading-snug text-ink/80 sm:text-[0.95rem]">
+                      {feature.label}
+                      {feature.isNew ? (
+                        <span className="ml-2 inline-flex align-middle text-[0.65rem] font-extrabold uppercase tracking-wide text-accent">
+                          Nova
+                        </span>
+                      ) : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                type="button"
+                onClick={() => openQuote(plan.ctaSource)}
+                className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-ink text-sm font-bold text-lime transition hover:bg-ink-soft sm:text-base"
+              >
+                Saiba Mais
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Social proof testimonials */}
+      <section className="bg-mist/55">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="inline-flex rounded-full border border-[#dce5ff] bg-[#edf2ff] px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#2d4fbf]">
+              O que nossos clientes dizem
+            </p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1.12] text-ink sm:text-5xl text-balance">
+              Histórias reais de quem transformou o atendimento e viu{' '}
+              <span className="text-lime-deep">resultados de verdade</span>
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {testimonials.map((testimonial) => (
+              <article
+                key={testimonial.name}
+                className="flex h-full flex-col rounded-3xl border border-ink/6 bg-white p-6 shadow-[0_14px_40px_-26px_rgba(15,46,31,0.45)]"
+              >
+                <p className="text-lg tracking-wide text-[#f5b301]">★★★★★</p>
+                <p className="mt-4 text-[1.04rem] leading-relaxed text-ink/72">
+                  "{testimonial.message}"
+                </p>
+                <span className="mt-5 inline-flex w-fit rounded-xl bg-[#edf2ff] px-3 py-1.5 text-sm font-semibold text-[#335ed5]">
+                  {testimonial.result}
+                </span>
+                <div className="mt-6 border-t border-ink/10 pt-5">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={testimonial.avatarSrc}
+                      alt={`Foto de ${testimonial.name}`}
+                      className="h-11 w-11 shrink-0 rounded-full object-cover shadow-sm"
+                      loading="lazy"
+                    />
+                    <span>
+                      <span className="block font-bold text-ink">{testimonial.name}</span>
+                      <span className="block text-sm text-ink/55">{testimonial.business}</span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
