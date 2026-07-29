@@ -112,7 +112,7 @@ export function QuoteForm({ source, variant = 'modal', onSuccessClose }: QuoteFo
           disabled={status === 'loading'}
           className="flex h-13 w-full items-center justify-center rounded-full bg-ink py-3.5 font-bold text-lime transition hover:bg-ink-soft disabled:opacity-60"
         >
-          {status === 'loading' ? 'Enviando...' : 'Quero minha proposta'}
+          {status === 'loading' ? 'Enviando...' : 'Falar com o consultor'}
         </button>
         <p className="pb-2 text-center text-xs text-ink/45">
           Sem spam. Resposta comercial em até 1 hora em horário comercial.

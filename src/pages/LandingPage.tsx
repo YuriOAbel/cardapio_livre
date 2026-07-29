@@ -122,8 +122,8 @@ export function LandingPage() {
               Cardápio Livre
             </p>
             <h1 className="animate-rise-delay mt-5 max-w-xl font-display text-2xl font-bold leading-[1.25] text-white text-balance sm:text-3xl md:text-4xl">
-              Nos tornamos seu negócio profissional com cardápio digital, sistema de gestão e sem
-              taxa de marketplace
+              Tornamos o seu negócio mais profissional com um cardápio digital, sistema de gestão e
+              sem taxas de marketplace.
             </h1>
             <p className="animate-rise-delay-2 mt-4 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
               Aumente as vendas do seu negócio em até 63% com cardápios digitais prontos para
@@ -156,11 +156,8 @@ export function LandingPage() {
               id="cotacao"
               className="relative overflow-hidden rounded-[2rem] bg-white p-5 shadow-2xl sm:p-6"
             >
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink/50">
-                Cotação gratuita
-              </p>
-              <h2 className="mt-1 font-display text-xl font-bold text-ink sm:text-2xl">
-                Monte sua proposta
+              <h2 className="font-display text-xl font-bold text-ink sm:text-2xl">
+                Fale com a nossa equipe
               </h2>
               <div className="mt-4">
                 <QuoteForm source="hero-form" variant="hero" />

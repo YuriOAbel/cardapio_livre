@@ -34,11 +34,8 @@ export function QuoteModal() {
       <div className="relative z-10 w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-white shadow-2xl">
         <div className="sticky top-0 flex items-center justify-between gap-3 border-b border-fog bg-white/95 px-5 py-4 backdrop-blur">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-ink/50">
-              Cotação gratuita
-            </p>
             <h2 id="quote-title" className="font-display text-xl font-bold text-ink">
-              Monte sua proposta
+              Fale com a nossa equipe
             </h2>
           </div>
           <button
