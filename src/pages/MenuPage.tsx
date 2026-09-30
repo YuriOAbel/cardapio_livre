@@ -75,7 +75,7 @@ export function MenuPage() {
     <div className="min-h-screen pb-24" style={{ background: menu.theme.bg }}>
       {/* Demo banner */}
       <div className="bg-ink px-4 py-2 text-center text-xs font-medium text-lime sm:text-sm">
-        Exemplo entregue pela Cardápio Livre ·{' '}
+        Exemplo entregue pela Simplifica Food ·{' '}
         <button
           type="button"
           onClick={() => openQuote(`cardapio-${menu.slug}`)}

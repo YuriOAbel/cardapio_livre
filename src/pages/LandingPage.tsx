@@ -7,8 +7,11 @@ import { portfolioPhotos } from '../data/portfolioPhotos'
 import avatar01 from '../assets/avatar/avatar-01.jpg'
 import avatar02 from '../assets/avatar/avatar-2.png'
 import avatar03 from '../assets/avatar/avatar-3.png'
+import logoSrc from '../assets/logo_escrito.png'
 import { CONTACT, MAILTO_URL, WHATSAPP_URL } from '../lib/contact'
 import { useQuote } from '../context/QuoteContext'
+
+const BRAND_NAME = 'Simplifica Food'
 
 const testimonials = [
   {
@@ -16,8 +19,7 @@ const testimonials = [
     business: 'Sabor da Vila Lanches',
     avatarSrc: avatar02,
     result: '+38% nos pedidos no 1º mês',
-    message:
-      'Eu precisava organizar pedidos no WhatsApp sem confusão. Com o Cardápio Livre, meu atendimento ficou rápido e os clientes compram com mais segurança.',
+    message: `Eu precisava organizar pedidos no WhatsApp sem confusão. Com o ${BRAND_NAME}, meu atendimento ficou rápido e os clientes compram com mais segurança.`,
   },
   {
     name: 'Rafael Costa',
@@ -39,7 +41,7 @@ const testimonials = [
 
 type PlanFeature = { label: string; isNew?: boolean }
 
-const planFeatures: PlanFeature[] = [
+const defaultPlanFeatures: PlanFeature[] = [
   { label: 'Criação de logotipo profissional' },
   { label: 'Identidade visual completa' },
   { label: 'Fotos profissionais dos produtos' },
@@ -59,25 +61,62 @@ const planFeatures: PlanFeature[] = [
   { label: 'Planos flexíveis' },
 ]
 
-const plan = {
-  name: 'Completo',
-  description:
-    'A casa arrumada e o sistema rodando: visual, tecnologia e gestão em um só pacote.',
-  fromPrice: 'R$189',
-  price: 'R$99',
-  features: planFeatures,
-  ctaSource: 'plano-completo',
-} as const
+export interface LandingPageContent {
+  heroTitle: string
+  heroTitleClassName?: string
+  heroSubtitle: string
+  planIntroTitle: string
+  planIntroBody: string[]
+  planFeatures?: PlanFeature[]
+  sourcePrefix?: string
+}
 
-export function LandingPage() {
+const defaultContent: LandingPageContent = {
+  heroTitle: BRAND_NAME,
+  heroSubtitle:
+    'Tornamos o seu negócio mais profissional com um cardápio digital, sistema de gestão e sem taxas de marketplace.',
+  planIntroTitle: 'Seu delivery parece amador? Isso está custando suas vendas.',
+  planIntroBody: [
+    'Você sabia que a aparência do seu cardápio e a facilidade de pagamento podem aumentar em até 63% o volume dos seus pedidos?',
+    'Nós criamos a solução definitiva para profissionalizar o seu negócio de alimentação, sem você precisar contratar vários profissionais diferentes.',
+    'Nós entregamos a casa arrumada e o sistema rodando em até 10 dias.',
+  ],
+}
+
+interface LandingPageProps {
+  content?: LandingPageContent
+}
+
+export function LandingPage({ content }: LandingPageProps) {
   const { openQuote } = useQuote()
+  const {
+    heroTitle,
+    heroTitleClassName,
+    heroSubtitle,
+    planIntroTitle,
+    planIntroBody,
+    planFeatures = defaultPlanFeatures,
+    sourcePrefix = '',
+  } = { ...defaultContent, ...content }
+
+  const brandMark = <img src={logoSrc} alt={BRAND_NAME} className="h-9 w-auto sm:h-11" />
+
+  const src = (id: string) => `${sourcePrefix}${id}`
+
+  const plan = {
+    name: 'Completo',
+    description:
+      'A casa arrumada e o sistema rodando: visual, tecnologia e gestão em um só pacote.',
+    features: planFeatures,
+    ctaSource: src('plano-completo'),
+  }
 
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-50 border-b border-ink/5 bg-mist/90 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6">
           <a href="#topo" className="font-display text-lg font-extrabold text-ink sm:text-xl">
-            Cardápio<span className="text-accent"> Livre</span>
+            {brandMark}
           </a>
           <nav className="hidden items-center gap-6 text-sm font-semibold text-ink/70 md:flex">
             <a href="#modelos" className="hover:text-ink transition">
@@ -95,7 +134,7 @@ export function LandingPage() {
           </nav>
           <button
             type="button"
-            onClick={() => openQuote('nav-garantir')}
+            onClick={() => openQuote(src('nav-garantir'))}
             className="rounded-full bg-ink px-4 py-2 text-sm font-bold text-lime transition hover:bg-ink-soft sm:px-5"
           >
             Garantir o seu
@@ -105,7 +144,7 @@ export function LandingPage() {
 
       {/* HERO — brand first, one composition */}
       <section id="topo" className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-soft to-[#244a35]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-soft to-ink-hero" />
         <div className="absolute inset-0 grain opacity-40" />
         <div
           className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-lime/20 blur-3xl animate-float"
@@ -118,12 +157,16 @@ export function LandingPage() {
 
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-8 lg:pt-20">
           <div>
-            <p className="animate-rise font-display text-4xl font-extrabold leading-[1.05] text-lime sm:text-5xl md:text-6xl lg:text-7xl">
-              Cardápio Livre
+            <p
+              className={[
+                'animate-rise font-display font-extrabold leading-[1.05] text-lime',
+                heroTitleClassName ?? 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl',
+              ].join(' ')}
+            >
+              {heroTitle}
             </p>
             <h1 className="animate-rise-delay mt-5 max-w-xl font-display text-2xl font-bold leading-[1.25] text-white text-balance sm:text-3xl md:text-4xl">
-              Tornamos o seu negócio mais profissional com um cardápio digital, sistema de gestão e
-              sem taxas de marketplace.
+              {heroSubtitle}
             </h1>
             <p className="animate-rise-delay-2 mt-4 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
               Aumente as vendas do seu negócio em até 63% com cardápios digitais prontos para
@@ -160,7 +203,7 @@ export function LandingPage() {
                 Fale com a nossa equipe
               </h2>
               <div className="mt-4">
-                <QuoteForm source="hero-form" variant="hero" />
+                <QuoteForm source={src('hero-form')} variant="hero" />
               </div>
             </div>
           </div>
@@ -191,53 +234,29 @@ export function LandingPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-display text-3xl font-extrabold leading-[1.12] text-ink sm:text-4xl md:text-5xl text-balance">
-              Seu delivery parece amador? Isso está custando suas vendas.
+              {planIntroTitle}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-ink/70 sm:text-lg">
-              Você sabia que a aparência do seu cardápio e a facilidade de pagamento podem aumentar
-              em até 63% o volume dos seus pedidos?
-            </p>
-            <p className="mt-3 text-base leading-relaxed text-ink/70 sm:text-lg">
-              Nós criamos a solução definitiva para profissionalizar o seu negócio de alimentação,
-              sem você precisar contratar vários profissionais diferentes.
-            </p>
-            <p className="mt-3 text-base leading-relaxed text-ink/70 sm:text-lg">
-              Por a partir de apenas{' '}
-              <span className="font-bold text-ink">R$99/mês</span>, nós entregamos a casa arrumada e
-              o sistema rodando em até 10 dias.
-            </p>
+            {planIntroBody.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={[
+                  'text-base leading-relaxed text-ink/70 sm:text-lg',
+                  index === 0 ? 'mt-5' : 'mt-3',
+                ].join(' ')}
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <span className="inline-flex rounded-full bg-ink px-5 py-1.5 text-sm font-bold text-lime">
-              Mensal
-            </span>
-          </div>
-
-          <div className="mx-auto mt-8 max-w-lg">
-            <article className="flex flex-col rounded-3xl border-2 border-accent bg-white p-6 shadow-[0_18px_50px_-28px_rgba(255,107,61,0.55)] sm:p-8">
+          <div className="mx-auto mt-10 max-w-lg">
+            <article className="flex flex-col rounded-3xl border-2 border-accent bg-white p-6 shadow-[0_18px_50px_-28px_rgba(214,40,40,0.55)] sm:p-8">
               <h3 className="font-display text-3xl font-extrabold text-ink sm:text-4xl">
                 {plan.name}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-ink/60 sm:text-base">
                 {plan.description}
               </p>
-
-              <div className="mt-6">
-                <p className="font-display text-xl font-bold text-ink/45 line-through sm:text-2xl">
-                  de {plan.fromPrice}/mês
-                </p>
-                <p className="mt-1 text-ink">
-                  <span className="text-sm font-semibold text-ink/55">por </span>
-                  <span className="font-display text-4xl font-extrabold text-ink sm:text-5xl">
-                    {plan.price}
-                  </span>
-                  <span className="text-base font-semibold text-ink/50">/mês</span>
-                </p>
-                <p className="mt-2 text-xs text-ink/45">
-                  *casa arrumada e sistema rodando em até 10 dias
-                </p>
-              </div>
 
               <ul className="mt-8 flex-1 space-y-3">
                 {plan.features.map((feature) => (
@@ -276,7 +295,7 @@ export function LandingPage() {
       <section className="bg-mist/55">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="inline-flex rounded-full border border-[#dce5ff] bg-[#edf2ff] px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#2d4fbf]">
+            <p className="inline-flex rounded-full border border-fog bg-mist px-4 py-1 text-xs font-bold uppercase tracking-wider text-accent">
               O que nossos clientes dizem
             </p>
             <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1.12] text-ink sm:text-5xl text-balance">
@@ -289,13 +308,13 @@ export function LandingPage() {
             {testimonials.map((testimonial) => (
               <article
                 key={testimonial.name}
-                className="flex h-full flex-col rounded-3xl border border-ink/6 bg-white p-6 shadow-[0_14px_40px_-26px_rgba(15,46,31,0.45)]"
+                className="flex h-full flex-col rounded-3xl border border-ink/6 bg-white p-6 shadow-[0_14px_40px_-26px_rgba(61,10,10,0.45)]"
               >
                 <p className="text-lg tracking-wide text-[#f5b301]">★★★★★</p>
                 <p className="mt-4 text-[1.04rem] leading-relaxed text-ink/72">
                   "{testimonial.message}"
                 </p>
-                <span className="mt-5 inline-flex w-fit rounded-xl bg-[#edf2ff] px-3 py-1.5 text-sm font-semibold text-[#335ed5]">
+                <span className="mt-5 inline-flex w-fit rounded-xl bg-mist px-3 py-1.5 text-sm font-semibold text-accent">
                   {testimonial.result}
                 </span>
                 <div className="mt-6 border-t border-ink/10 pt-5">
@@ -385,7 +404,7 @@ export function LandingPage() {
                   </Link>
                   <button
                     type="button"
-                    onClick={() => openQuote(`modelo-${m.slug}`)}
+                    onClick={() => openQuote(src(`modelo-${m.slug}`))}
                     className="rounded-full border border-ink/15 px-4 py-2.5 text-sm font-bold text-ink transition hover:bg-mist"
                   >
                     Quero o meu
@@ -420,7 +439,7 @@ export function LandingPage() {
           <div className="mt-10 text-center">
             <button
               type="button"
-              onClick={() => openQuote('portfolio-quero')}
+              onClick={() => openQuote(src('portfolio-quero'))}
               className="inline-flex h-12 items-center justify-center rounded-full bg-ink px-8 font-bold text-lime transition hover:bg-ink-soft"
             >
               Quero o meu
@@ -474,7 +493,7 @@ export function LandingPage() {
           <div className="mt-12">
             <button
               type="button"
-              onClick={() => openQuote('vantagens-garantir')}
+              onClick={() => openQuote(src('vantagens-garantir'))}
               className="inline-flex h-12 items-center justify-center rounded-full bg-lime px-8 font-bold text-ink transition hover:bg-lime-deep"
             >
               Garantir o seu
@@ -514,7 +533,7 @@ export function LandingPage() {
         <div className="mt-10 text-center">
           <button
             type="button"
-            onClick={() => openQuote('como-comece')}
+            onClick={() => openQuote(src('como-comece'))}
             className="inline-flex h-12 items-center justify-center rounded-full bg-ink px-8 font-bold text-lime transition hover:bg-ink-soft"
           >
             Comece agora
@@ -523,7 +542,7 @@ export function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-accent to-[#ff8f5c]">
+      <section className="relative overflow-hidden bg-gradient-to-r from-accent to-accent-soft">
         <div className="absolute inset-0 grain opacity-30" />
         <div className="relative mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20">
           <h2 className="font-display text-3xl font-extrabold leading-[1.2] text-white sm:text-5xl text-balance">
@@ -534,7 +553,7 @@ export function LandingPage() {
           </p>
           <button
             type="button"
-            onClick={() => openQuote('final-quero')}
+            onClick={() => openQuote(src('final-quero'))}
             className="mt-8 inline-flex h-13 items-center justify-center rounded-full bg-ink px-10 py-3.5 font-bold text-lime transition hover:scale-[1.02]"
           >
             Quero o meu
@@ -545,9 +564,7 @@ export function LandingPage() {
       <footer className="border-t border-ink/5 bg-white">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-2">
           <div>
-            <p className="font-display text-lg font-bold text-ink">
-              Cardápio<span className="text-accent"> Livre</span>
-            </p>
+            <p className="font-display text-lg font-bold text-ink">{brandMark}</p>
             <dl className="mt-4 space-y-2 text-sm text-ink/65">
               <div>
                 <dt className="font-semibold text-ink/80">Empresa</dt>

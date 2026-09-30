@@ -3,14 +3,16 @@
 @theme {
   --font-display: "Outfit", system-ui, sans-serif;
   --font-sans: "Manrope", system-ui, sans-serif;
-  --color-ink: #0f2e1f;
-  --color-ink-soft: #1a3d2b;
-  --color-lime: #d4ff4a;
-  --color-lime-deep: #b8e020;
-  --color-mist: #eef2ef;
-  --color-fog: #dce5df;
-  --color-warm: #fff8f0;
-  --color-accent: #ff6b3d;
+  --color-ink: #3d0a0a;
+  --color-ink-soft: #6b1212;
+  --color-ink-hero: #8f1a1a;
+  --color-lime: #ff5a4e;
+  --color-lime-deep: #e0362b;
+  --color-mist: #fdf2f1;
+  --color-fog: #f6dcd9;
+  --color-warm: #fff6f4;
+  --color-accent: #d62828;
+  --color-accent-soft: #f25c4a;
 }
 
 @layer base {

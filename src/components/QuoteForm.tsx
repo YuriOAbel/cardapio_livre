@@ -122,17 +122,17 @@ export function QuoteForm({ source, variant = 'modal', onSuccessClose }: QuoteFo
         .field {
           width: 100%;
           border-radius: 0.875rem;
-          border: 1.5px solid #dce5df;
-          background: #f8faf8;
+          border: 1.5px solid var(--color-fog);
+          background: var(--color-warm);
           padding: 0.75rem 0.9rem;
           font-size: 0.95rem;
-          color: #0f2e1f;
+          color: var(--color-ink);
           outline: none;
           transition: border-color 0.15s, box-shadow 0.15s;
         }
         .field:focus {
-          border-color: #0f2e1f;
-          box-shadow: 0 0 0 3px rgba(212, 255, 74, 0.45);
+          border-color: var(--color-ink);
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-lime) 35%, transparent);
           background: #fff;
         }
       `}</style>

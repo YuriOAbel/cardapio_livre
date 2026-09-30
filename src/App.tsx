@@ -4,6 +4,7 @@ import { QuoteModal } from './components/QuoteModal'
 import { ScrollToTop } from './components/ScrollToTop'
 import { WhatsAppFloat } from './components/WhatsAppFloat'
 import { LandingPage } from './pages/LandingPage'
+import { RestaurantLandingPage } from './pages/RestaurantLandingPage'
 import { MenuPage } from './pages/MenuPage'
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
@@ -15,6 +16,7 @@ export default function App() {
       <QuoteProvider>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/restaurantes" element={<RestaurantLandingPage />} />
           <Route path="/cardapio/:slug" element={<MenuPage />} />
         </Routes>
         <QuoteModal />
